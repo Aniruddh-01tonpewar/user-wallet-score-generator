@@ -1,4 +1,4 @@
-<details><summary>Click to expand the full readme content</summary>
+<details><summary>Click to expand the full README content</summary>
 
 # Wallet Credit Scoring with Aave V2 Transaction Data
 
@@ -20,8 +20,7 @@ This choice balances interpretability with efficiency, ideal for rapid iteration
 
 ##  Architecture & Processing Flow
 
-```mermaid
-graph TD
+
     A[Load raw JSON data] --> B[Normalize JSON structure]
     B --> C [Extract: userWallet, actionType, amount]
     C --> D [Convert amount to float]
@@ -34,8 +33,10 @@ graph TD
     J --> K [Scale probabilities to credit score (0–1000)]
     K --> L [Output final wallet-score dictionary]
     
+---    
 ##  Feature Engineering
 
+---
 ###  Feature Encoding Table
 
 | Action Type         | Feature Score | Target Label | Description                         |
@@ -60,15 +61,21 @@ The model used is Logistic Regression due to its:
 ##  Score Generation Logic
 
 Each transaction is classified with a probability of responsible behavior. 
+
 The final score is computed by:
+
 wallet_scores = df.groupby("wallet")["responsible_prob"].mean()
+
 wallet_scores_scaled = (wallet_scores * 1000).round().astype(int)
 
 ##  How to Run
 
 Install dependencies:
+
 pip install pandas numpy scikit-learn
+
 Execute the script:
+
 python wallet_score_generator.py
 
 This one-step script loads the transaction data, processes features, trains the model, scores each wallet, and exports results to wallet_scores.json.
@@ -82,12 +89,16 @@ Please store the extracted file as:
 
 ```plaintext
 user-wallet-transactions-sample.json
+```
 
 ## Files Included
 
 wallet_score_generator.py → End-to-end scoring script
+
 readme.md → Methodology, architecture, and running instructions
+
 analysis.md → Score ranges and behavioral breakdown with distribution visualization
+
 user-wallet-transactions-sample -> small sample of user-transactions
  
 
